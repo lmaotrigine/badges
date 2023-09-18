@@ -21,3 +21,6 @@ strip = true
 
 [profile.test]
 debug = true
+
+[features]
+hex_colours = []

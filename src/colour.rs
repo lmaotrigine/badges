@@ -1,5 +1,9 @@
+use core::fmt::Display;
+#[cfg(feature = "hex_colours")]
+use core::str::FromStr;
+
+#[cfg(any(test, feature = "hex_colours"))]
 use regex::Regex;
-use std::{fmt::Display, str::FromStr};
 
 /// An RGB colour.
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
@@ -36,6 +40,7 @@ impl Colour {
     /// If this function panics, it indicates that the Regex used to find long and short hex codes
     /// is invalid. If you encounter this, please file a bug report.
     #[must_use]
+    #[cfg(any(test, feature = "hex_colours"))]
     pub fn from_hex(hex: &str) -> Option<Self> {
         let long_hex = Regex::new(r"^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$").unwrap();
         let short_hex = Regex::new(r"^#([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])$").unwrap();
@@ -98,6 +103,7 @@ impl Display for Colour {
     }
 }
 
+#[cfg(feature = "hex_colours")]
 impl FromStr for Colour {
     type Err = String;
 

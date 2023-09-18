@@ -26,10 +26,8 @@ fn width_of_char_code(char_code: u32) -> Option<f32> {
 pub fn measure(text: &str) -> f32 {
     let mut width = 0.0;
     for c in text.chars() {
-        match width_of_char_code(c as _) {
-            Some(w) => width += w,
-            None => width += 10.7, // width of 'm'
-        }
+        // width of 'm' is 10.7
+        width += width_of_char_code(c as _).unwrap_or(10.7);
     }
     width
 }
