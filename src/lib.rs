@@ -26,7 +26,7 @@ mod xml;
 const FONT_FAMILY: &str = "Verdana,Geneva,DejaVu Sans,sans-serif";
 const FONT_SCALE_UP_FACTOR: f32 = 10.0;
 const FONT_SCALE_DOWN_VALUE: &str = "scale(.1)";
-const BRIGHTNESS_THRESHOLD: f32 = 0.69;
+const BRIGHTNESS_THRESHOLD: u8 = 176; // 0.69 * 255
 const HEIGHT: f32 = 20.0;
 const VERTICAL_MARGIN: f32 = 0.0;
 const SHADOW: bool = true;

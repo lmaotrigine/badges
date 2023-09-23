@@ -6,11 +6,17 @@ use crate::{
     LOGO_HEIGHT, SHADOW, VERTICAL_MARGIN,
 };
 
-fn colours_for_background(colour: Colour) -> (Colour, Colour) {
+const fn colours_for_background(colour: Colour) -> (Colour, Colour) {
     if colour.brightness() <= BRIGHTNESS_THRESHOLD {
-        (Colour::WHITE, Colour::BLACK)
+        (
+            Colour::from_colour_code(0xff_ff_ff),
+            Colour::from_colour_code(0x01_01_01),
+        )
     } else {
-        (Colour::CHARCOAL, Colour::SILVER)
+        (
+            Colour::from_colour_code(0x33_33_33),
+            Colour::from_colour_code(0xcc_cc_cc),
+        )
     }
 }
 
@@ -137,8 +143,8 @@ impl<'a> Badge<'a> {
         colour: Option<Colour>,
         label_colour: Option<Colour>,
     ) -> Self {
-        let colour = colour.unwrap_or(Colour::GREEN);
-        let label_colour = label_colour.unwrap_or(Colour::GREY);
+        let colour = colour.unwrap_or(Colour::from_colour_code(0x44_cc_11));
+        let label_colour = label_colour.unwrap_or(Colour::from_colour_code(0x55_55_55));
         Self {
             label_colour,
             colour,
