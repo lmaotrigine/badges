@@ -10,8 +10,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-regex = "1.9.5"
-codegen = { path = "codegen", version = "*" }
+badges-codegen = { path = "codegen", version = "*" }
+regex = { version = "1", optional = true }
+ryu = "1"
 
 [profile.release]
 lto = true
@@ -24,4 +25,4 @@ strip = true
 debug = true
 
 [features]
-hex_colours = []
+hex_colours = ["regex"]

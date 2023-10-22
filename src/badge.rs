@@ -1,7 +1,10 @@
+use std::borrow::Cow;
+
 use crate::{
     colour::Colour,
     font::measure,
-    xml::{Content, Element, ElementList, Render},
+    traits::Render,
+    xml::{Content, Element, ElementList},
     BRIGHTNESS_THRESHOLD, FONT_FAMILY, FONT_SCALE_DOWN_VALUE, FONT_SCALE_UP_FACTOR, HEIGHT,
     LOGO_HEIGHT, SHADOW, VERTICAL_MARGIN,
 };
@@ -358,8 +361,8 @@ impl<'a> Badge<'a> {
     }
 }
 
-impl<'a> Render for Badge<'a> {
-    fn render(&self) -> String {
+impl<'a> Render<'a> for Badge<'a> {
+    fn render(&self) -> Cow<'a, str> {
         let gradient = Element::new("linearGradient")
             .content(vec![
                 Content::Element(
@@ -399,6 +402,6 @@ impl<'a> Render for Badge<'a> {
             .attr_float("height", HEIGHT)
             .attr("role", "img")
             .attr("aria-label", self.accessible_text());
-        svg.render()
+        Cow::Owned(svg.render().into_owned())
     }
 }

@@ -1,5 +1,11 @@
 #![forbid(unsafe_code)]
-#![deny(clippy::pedantic, clippy::nursery, missing_docs)]
+#![deny(
+    clippy::pedantic,
+    clippy::nursery,
+    missing_docs,
+    clippy::unwrap_in_result,
+    clippy::unwrap_used
+)]
 
 //! A library for generating SVG badges.
 //!
@@ -20,7 +26,9 @@
 mod badge;
 mod colour;
 mod font;
+mod traits;
 mod vendor;
+
 mod xml;
 
 const FONT_FAMILY: &str = "Verdana,Geneva,DejaVu Sans,sans-serif";
@@ -34,4 +42,4 @@ const LOGO_HEIGHT: f32 = 14.0;
 
 pub use badge::{Badge, Builder as BadgeBuilder};
 pub use colour::Colour;
-pub use xml::Render;
+pub use traits::Render;

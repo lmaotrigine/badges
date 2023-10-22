@@ -1,3 +1,12 @@
+#![forbid(
+    unsafe_code,
+    clippy::all,
+    clippy::pedantic,
+    clippy::nursery,
+    clippy::unwrap_in_result,
+    clippy::unwrap_used
+)]
+
 use core::str::FromStr;
 use proc_macro::{TokenStream, TokenTree};
 

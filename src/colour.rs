@@ -1,8 +1,8 @@
-use codegen::named_colour;
+use badges_codegen::named_colour;
 use core::fmt::Display;
 #[cfg(feature = "hex_colours")]
 use core::str::FromStr;
-#[cfg(any(test, feature = "hex_colours"))]
+#[cfg(feature = "hex_colours")]
 use regex::Regex;
 
 #[allow(clippy::inline_always)]
@@ -204,7 +204,7 @@ impl Colour {
     /// If this function panics, it indicates that the Regex used to find long and short hex codes
     /// is invalid. If you encounter this, please file a bug report.
     #[must_use]
-    #[cfg(any(test, feature = "hex_colours"))]
+    #[cfg(feature = "hex_colours")]
     pub fn from_hex(hex: &str) -> Option<Self> {
         let long_hex = Regex::new(r"^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$").unwrap();
         let short_hex = Regex::new(r"^#([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])$").unwrap();
@@ -287,6 +287,7 @@ To use named colours, make use of the constants provided by the `Colour` struct.
 }
 
 #[cfg(test)]
+#[cfg(feature = "hex_colours")]
 mod tests {
     use super::*;
 
