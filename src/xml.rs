@@ -97,10 +97,10 @@ impl<'a> Render<'a> for Element<'a> {
     fn render(&self) -> Cow<'a, str> {
         let attrs_str = self.attrs.iter().map(ToString::to_string).join(" ");
         match self.content.iter().peekable().peek() {
-            None => format!("<{}{}/>", self.name, attrs_str).into(),
+            None => format!("<{} {}/>", self.name, attrs_str).into(),
             Some(_) => {
                 let content = self.content.iter().map(Render::render).join("");
-                format!("<{0}{1}>{2}</{0}>", self.name, attrs_str, content).into()
+                format!("<{0} {1}>{2}</{0}>", self.name, attrs_str, content).into()
             }
         }
     }
