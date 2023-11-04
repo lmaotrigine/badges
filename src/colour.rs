@@ -247,13 +247,12 @@ impl Colour {
         Self { r, g, b }
     }
 
-    /// Returns the "brightness" of the colour, as a value between 0 and 1.
+    /// Returns the "brightness" of the colour, as a value between 0 and 255.
     ///
     /// If this value is more than 176, the colour is considered "light", and the text colour
     /// will be charcoal. Otherwise, the text colour will be white.
-    //#[allow(clippy::trivially_copy_pass_by_ref)] // we don't want to take ownership of self?
     #[must_use]
-    pub const fn brightness(self) -> u8 {
+    pub const fn brightness(&self) -> u8 {
         let mut luma: u8 = 0;
         luma += scale8(self.r, 54);
         luma += scale8(self.g, 183);
